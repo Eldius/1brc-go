@@ -2,3 +2,4 @@
 .vscode/**
 
 measurements_*.txt
+*.tar.bz2
