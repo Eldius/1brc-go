@@ -1,5 +1,11 @@
 # 1BRC #
 
+## links ##
+
+- [1BRC Site](https://mrkaran.dev/posts/1brc/)
+- [1BRC Github Repository](https://github.com/gunnarmorling/1brc)
+
+
 ## code snippets ##
 
 ```shell
