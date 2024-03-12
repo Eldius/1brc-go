@@ -7,14 +7,30 @@ import (
 	"github.com/eldius/1brc-go/internal/process"
 	"log/slog"
 	"os"
+	"slices"
 	"sync"
 )
 
 func init() {
+	hostname, _ := os.Hostname()
 	slog.SetDefault(slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
 		AddSource: false,
 		Level:     slog.LevelDebug,
-	})))
+		ReplaceAttr: func(groups []string, a slog.Attr) slog.Attr {
+			if slices.Contains([]string{"hostname", "service", "level"}, a.Key) {
+				return a
+			}
+			if a.Key == "msg" {
+				a.Key = "message"
+				return a
+			}
+			a.Key = "custom.1brc." + a.Key
+			return a
+		},
+	})).With(
+		slog.String("hostname", hostname),
+		slog.String("service", "1brc"),
+	))
 }
 
 func main() {
