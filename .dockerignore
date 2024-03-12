@@ -1,0 +1,5 @@
+internal/parser/sample_data/**
+Makefile
+.git/**
+.gitignore
+README/md
