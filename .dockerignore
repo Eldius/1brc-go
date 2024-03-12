@@ -1,5 +1,8 @@
-internal/parser/sample_data/**
+internal/reader/sample_data/**
 Makefile
 .git/**
 .gitignore
 README/md
+*.tar.bz2
+.idea/**
+.vscode/**

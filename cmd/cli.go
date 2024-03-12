@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/eldius/1brc-go/internal/parser"
 	"github.com/eldius/1brc-go/internal/process"
+	"github.com/eldius/1brc-go/internal/reader"
 	"log/slog"
 	"os"
 	"slices"
@@ -34,8 +34,8 @@ func init() {
 }
 
 func main() {
-	fileName := flag.String("file", "./internal/parser/sample_data/measurements_50.txt", "File to be parsed")
-	workersCount := flag.Int("workers-count", 5, "File to be parsed")
+	fileName := flag.String("file", "measurements.txt", "File to be parsed")
+	workersCount := flag.Int("workers-count", 5, "Record processors count")
 	queueSize := flag.Int("queue-size", 5, "Process queue size")
 
 	flag.Parse()
@@ -50,7 +50,7 @@ func main() {
 
 	in := make(chan [2]string, *queueSize)
 	go func(in chan [2]string) {
-		if err := parser.Read(*fileName, in); err != nil {
+		if err := reader.Read(*fileName, in); err != nil {
 			err = fmt.Errorf("setting up readers: %w", err)
 			panic(err)
 		}
