@@ -17,7 +17,7 @@ func init() {
 		AddSource: false,
 		Level:     slog.LevelDebug,
 		ReplaceAttr: func(groups []string, a slog.Attr) slog.Attr {
-			if slices.Contains([]string{"hostname", "service", "level"}, a.Key) {
+			if slices.Contains([]string{"host.name", "service.name", "level", "message"}, a.Key) {
 				return a
 			}
 			if a.Key == "msg" {
@@ -29,7 +29,7 @@ func init() {
 		},
 	})).With(
 		slog.String("hostname", hostname),
-		slog.String("service", "1brc"),
+		slog.String("service.name", "1brc"),
 	))
 }
 
