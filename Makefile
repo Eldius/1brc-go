@@ -1,15 +1,15 @@
 
 sample-50:
-	go run ./cmd/ --file $(PWD)/internal/reader/sample_data/measurements_50.txt --workers-count 10 --queue-size 30
+	go run ./cmd/ --file $(PWD)/internal/reader/sample_data/measurements_50.txt --workers-count 10 --queue-size 30 --trace
 
 sample-1b:
 	go run ./cmd/cli.go --file $(PWD)/internal/reader/sample_data/measurements_1b.txt --workers-count 10 --queue-size 30
 
 sample-1k:
-	go run ./cmd/cli.go --file $(PWD)/internal/reader/sample_data/measurements_1k.txt --workers-count 50 --queue-size 30
+	go run ./cmd/cli.go --file $(PWD)/internal/reader/sample_data/measurements_1k.txt --workers-count 50 --queue-size 30 --trace
 
 sample-1m:
-	go run ./cmd/cli.go --file $(PWD)/internal/reader/sample_data/measurements_1m.txt --workers-count 50 --queue-size 75
+	go run ./cmd/cli.go --file $(PWD)/internal/reader/sample_data/measurements_1m.txt --workers-count 50 --queue-size 75 --trace
 
 build-docker:
 	docker \
@@ -42,7 +42,7 @@ run-docker-exportlogs:
 		run \
 		-m 512m \
 		--cpus=4 \
-		-v "$(PWD)/internal/parser/sample_data/measurements_1b.txt:/app/measurements.txt:ro" \
+		-v "$(PWD)/internal/reader/sample_data/measurements_1b.txt:/app/measurements.txt:ro" \
 		--log-driver=fluentd \
 		--log-opt fluentd-address=$(FLUENTBIT_HOST) \
 		--rm \

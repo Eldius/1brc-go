@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"github.com/eldius/1brc-go/internal/process"
 	"github.com/eldius/1brc-go/internal/reader"
+	"golang.org/x/exp/trace"
 	"log/slog"
 	"os"
 	"slices"
@@ -37,6 +39,7 @@ func main() {
 	fileName := flag.String("file", "measurements.txt", "File to be parsed")
 	workersCount := flag.Int("workers-count", 5, "Record processors count")
 	queueSize := flag.Int("queue-size", 5, "Process queue size")
+	traceEnabled := flag.Bool("trace", false, "Enable trace recording")
 
 	flag.Parse()
 
@@ -45,6 +48,31 @@ func main() {
 		slog.Int("workers-count", *workersCount),
 		slog.Int("queue-size", *workersCount),
 	)
+
+	deferredFunc := func() func() {
+		if *traceEnabled {
+			fr := trace.NewFlightRecorder()
+			_ = fr.Start()
+
+			return func() {
+				var b bytes.Buffer
+				_, err := fr.WriteTo(&b)
+				if err != nil {
+					err = fmt.Errorf("parsing trace data: %w", err)
+					log.With("error", err).Error("parsing trace data")
+					return
+				}
+				// Write it to a file.
+				if err := os.WriteFile("trace.out", b.Bytes(), 0o755); err != nil {
+					err = fmt.Errorf("writing trace data to file: %w", err)
+					log.With("error", err).Error("writing trace data to file")
+					return
+				}
+			}
+		}
+		return func() {}
+	}()
+	defer deferredFunc()
 
 	log.Info("starting...")
 

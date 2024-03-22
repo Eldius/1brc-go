@@ -3,3 +3,4 @@
 
 measurements_*.txt
 *.tar.bz2
+trace.out
