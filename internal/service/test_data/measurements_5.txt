@@ -1,0 +1,5 @@
+Chiang Mai;24.7
+Split;11.2
+Kyoto;-2.4
+Abha;6.4
+Reggane;40.1

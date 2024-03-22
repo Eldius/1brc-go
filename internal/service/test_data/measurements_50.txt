@@ -1,0 +1,50 @@
+New Delhi;21.6
+Helsinki;10.1
+Portland (OR);-1.7
+Toamasina;20.0
+Surabaya;35.4
+Lomé;30.4
+Kyoto;29.6
+San Francisco;12.4
+Lake Tekapo;3.1
+Kathmandu;25.4
+Jakarta;27.2
+Mandalay;11.8
+Bloemfontein;11.4
+Charlotte;7.8
+Busan;13.1
+San José;11.8
+Dar es Salaam;35.1
+Rostov-on-Don;9.8
+Boise;-8.9
+Andorra la Vella;-13.9
+Moncton;0.8
+Ashgabat;14.9
+Kinshasa;22.6
+Honiara;14.0
+Assab;52.3
+St. Louis;12.4
+Niigata;37.8
+Durban;22.3
+Boise;11.6
+Hanga Roa;17.8
+Lake Tekapo;9.3
+Dunedin;9.7
+Ouagadougou;12.4
+Batumi;2.2
+Ouarzazate;25.0
+Hamilton;9.5
+Sacramento;30.5
+Ifrane;15.0
+Gagnoa;19.3
+Ouahigouya;0.8
+Tehran;29.2
+Boston;21.6
+Podgorica;23.7
+Dili;21.7
+Maputo;28.0
+Benghazi;37.3
+Yangon;37.4
+La Ceiba;42.6
+Bloemfontein;24.1
+Guangzhou;27.5

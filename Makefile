@@ -9,7 +9,7 @@ sample-1k:
 	go run ./cmd/cli.go --file $(PWD)/internal/reader/sample_data/measurements_1k.txt --workers-count 50 --queue-size 30 --trace
 
 sample-1m:
-	go run ./cmd/cli.go --file $(PWD)/internal/reader/sample_data/measurements_1m.txt --workers-count 50 --queue-size 75 --trace
+	go run ./cmd/cli.go --file $(PWD)/internal/reader/sample_data/measurements_1m.txt --workers-count 6 --queue-size 24 --trace
 
 build-docker:
 	docker \

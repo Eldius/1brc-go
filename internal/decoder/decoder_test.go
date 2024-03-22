@@ -1,6 +1,7 @@
-package process
+package decoder
 
 import (
+	"github.com/stretchr/testify/assert"
 	"math"
 	"sync"
 	"testing"
@@ -15,7 +16,7 @@ func almostEqual(a, b float64) bool {
 
 func TestProcess(t *testing.T) {
 	t.Run("single location with two values", func(t *testing.T) {
-		p := NewProcessor()
+		p := NewProcessorWg()
 		var wg sync.WaitGroup
 		wg.Add(5)
 		in := make(chan [2]string)
@@ -49,14 +50,18 @@ func TestProcess(t *testing.T) {
 func TestName(t *testing.T) {
 	r := newRecord()
 	t.Logf("record struct size: %d", unsafe.Sizeof(*r))
-	d := newProcessData()
-	d.Add([2]string{"Rio", "1.5"})
-	d.Add([2]string{"Sampa", "1.5"})
-	d.Add([2]string{"Rio", "2.5"})
-	d.Add([2]string{"Sampa", "3.5"})
-	d.Add([2]string{"Minas", "3.5"})
-	d.Add([2]string{"Minas", "3.5"})
-	d.Add([2]string{"Sampa", "3.5"})
-	d.Add([2]string{"Sampa", "3.5"})
-	t.Logf("processed data struct size: %d", unsafe.Sizeof(*d))
+	d := newDecodedData()
+
+	t.Logf("[before] processed data struct size: %d", unsafe.Sizeof(*d))
+
+	assert.Nil(t, d.Add([2]string{"Rio", "1.5"}))
+	assert.Nil(t, d.Add([2]string{"Sampa", "1.5"}))
+	assert.Nil(t, d.Add([2]string{"Rio", "2.5"}))
+	assert.Nil(t, d.Add([2]string{"Sampa", "3.5"}))
+	assert.Nil(t, d.Add([2]string{"Minas", "3.5"}))
+	assert.Nil(t, d.Add([2]string{"Minas", "3.5"}))
+	assert.Nil(t, d.Add([2]string{"Sampa", "3.5"}))
+	assert.Nil(t, d.Add([2]string{"Sampa", "3.5"}))
+
+	t.Logf("[after] processed data struct size: %d", unsafe.Sizeof(*d))
 }
