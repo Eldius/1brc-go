@@ -9,7 +9,7 @@ import (
 	"sync"
 )
 
-func Consume(queueSize, workersCount int, fileName string) {
+func ConsumeWaitGroup(queueSize, workersCount int, fileName string) {
 	in := make(chan [2]string, queueSize)
 	go func(in chan [2]string) {
 		if err := reader.Read(fileName, in); err != nil {
@@ -29,7 +29,7 @@ func Consume(queueSize, workersCount int, fileName string) {
 	p.Print()
 }
 
-func ConsumeAlt(queueSize, workersCount int, fileName string) error {
+func ConsumeErrorGroup(queueSize, workersCount int, fileName string) error {
 	in := make(chan [2]string, queueSize)
 	go func(in chan [2]string) {
 		if err := reader.Read(fileName, in); err != nil {

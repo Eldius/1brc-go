@@ -4,3 +4,8 @@
 internal/reader/sample_data/measurements_*.txt
 *.tar.bz2
 trace.out
+
+/*.prof
+/*.svg
+/*.gif
+*.test

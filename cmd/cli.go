@@ -74,9 +74,9 @@ func main() {
 
 	log.Info("starting...")
 
-	//if err := service.ConsumeAlt(*queueSize, *workersCount, *fileName); err != nil {
+	//if err := service.ConsumeErrorGroup(*queueSize, *workersCount, *fileName); err != nil {
 	//	err = fmt.Errorf("consuming data: %w", err)
 	//	panic(err)
 	//}
-	service.Consume(*queueSize, *workersCount, *fileName)
+	service.ConsumeWaitGroup(*queueSize, *workersCount, *fileName)
 }
