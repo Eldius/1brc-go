@@ -100,3 +100,5 @@ clean:
 	-rm *.prof
 	-rm *.svg
 	-rm *.gif
+	-rm *.out
+	-rm *.test
