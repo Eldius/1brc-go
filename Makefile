@@ -31,12 +31,33 @@ build-docker:
 		--tag eldius/1brc:latest \
 			.
 
-run-docker: build-docker
+run-docker-1b: build-docker
 	docker \
 		run \
 		-m 512m \
 		--cpus=4 \
 		-v "$(PWD)/internal/reader/sample_data/measurements_1b.txt:/app/measurements.txt:ro" \
+		--name 1brc \
+		--rm \
+			eldius/1brc:latest --file /app/measurements.txt --workers-count 5 --queue-size 10
+
+run-docker-1m: build-docker
+	docker \
+		run \
+		-m 512m \
+		--cpus=4 \
+		-v "$(PWD)/internal/reader/sample_data/measurements_1m.txt:/app/measurements.txt:ro" \
+		--name 1brc \
+		--rm \
+			eldius/1brc:latest --file /app/measurements.txt --workers-count 5 --queue-size 10
+
+run-docker-100k: build-docker
+	docker \
+		run \
+		-m 1g \
+		--cpus=2 \
+		-v "$(PWD)/internal/reader/sample_data/measurements_100k.txt:/app/measurements.txt:ro" \
+		--name 1brc \
 		--rm \
 			eldius/1brc:latest --file /app/measurements.txt --workers-count 5 --queue-size 10
 

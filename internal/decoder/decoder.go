@@ -85,7 +85,7 @@ func (p *ProcessorWg) Print() {
 func (p *ProcessorWg) Process(wg *sync.WaitGroup, ch chan [2]string) {
 	defer wg.Done()
 	for d := range ch {
-		slog.With(slog.String("line", fmt.Sprintf("%v", d))).Info("processing")
+		//slog.With(slog.String("line", fmt.Sprintf("%v", d))).Info("processing")
 		_ = p.d.Add(d)
 	}
 }
